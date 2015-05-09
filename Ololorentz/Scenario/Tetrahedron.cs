@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Ololorentz {
     public static class Tetrahedron {
-        public static void RunMain(string[] args) {
+        public static Scenario GetScenario() {
             Vector3
             _a = new Vector3(-5, -5, -3),
             _b = new Vector3(5, -5, -3),
@@ -26,12 +26,9 @@ namespace Ololorentz {
             Polygon s_acd = new Polygon(new Trajectory[] {a, c, d}, Color.Red);
             Polygon s_bcd = new Polygon(new Trajectory[] {b, c, d}, Color.Purple);
 
-            Scenario scenario = new Scenario() {
+            return new Scenario() {
                 Polygons = new Polygon[] {s_abc, s_abd, s_acd, s_bcd}
             };
-
-            var scene = new Scene(scenario);
-            scene.Run();
         }
     }
 }

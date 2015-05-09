@@ -31,16 +31,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Core" />
     <Reference Include="MonoGame.Framework">
-      <HintPath>..\..\..\soft\MonoGame\dll\MonoGame.Framework.dll</HintPath>
+      <HintPath>dll\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK">
-      <HintPath>..\..\..\soft\MonoGame\dll\OpenTK.dll</HintPath>
+      <HintPath>dll\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="Tao.Sdl">
-      <HintPath>..\..\..\soft\MonoGame\dll\Tao.Sdl.dll</HintPath>
+      <HintPath>dll\Tao.Sdl.dll</HintPath>
     </Reference>
-    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Sources\AssemblyInfo.cs" />

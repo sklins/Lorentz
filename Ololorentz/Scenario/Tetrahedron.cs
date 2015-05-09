@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Ololorentz {
-    public static class Program {
-        public static void Main(string[] args) {
+    public static class Tetrahedron {
+        public static void RunMain(string[] args) {
             Vector3
             _a = new Vector3(-5, -5, -3),
             _b = new Vector3(5, -5, -3),

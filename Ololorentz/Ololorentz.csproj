@@ -44,15 +44,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Sources\AssemblyInfo.cs" />
-    <Compile Include="Sources\Program.cs" />
     <Compile Include="Sources\Scene.cs" />
     <Compile Include="Sources\Primitives.cs" />
     <Compile Include="Sources\MouseData.cs" />
     <Compile Include="Sources\Scene_Draw.cs" />
     <Compile Include="Sources\Scene_Update.cs" />
+    <Compile Include="Scenario\Tetrahedron.cs" />
+    <Compile Include="Scenario\Main.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Sources\" />
+    <Folder Include="Scenario\" />
   </ItemGroup>
 </Project>

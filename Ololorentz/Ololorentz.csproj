@@ -47,6 +47,7 @@
     <Compile Include="Sources\Program.cs" />
     <Compile Include="Sources\Scene.cs" />
     <Compile Include="Sources\Primitives.cs" />
+    <Compile Include="Sources\MouseData.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

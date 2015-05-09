@@ -30,6 +30,15 @@ namespace Ololorentz {
             Window.Title = String.Format("{0} (press space to start)", WindowTitle);
         }
 
+        private MouseData mouseData = new MouseData();
+        private const float MouseSensivity = 0.01f;
+
+        private void HandleMouseRotation(MouseState mouseState) {
+            bool mouseActive = mouseState.LeftButton.HasFlag(ButtonState.Pressed);
+            Point position = mouseState.Position;
+            mouseData.Update(mouseActive, position);
+        }
+
         protected override void Draw(GameTime gameTime) {
             base.Draw(gameTime);
             GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -39,8 +48,12 @@ namespace Ololorentz {
             GraphicsDevice.RasterizerState = RasterizerState.CullNone;
 
             // Setting up the camera position
+            Matrix cameraRotation = Matrix.CreateRotationY(mouseData.Phi * MouseSensivity) *
+                Matrix.CreateRotationX(mouseData.Theta * MouseSensivity);
+
             basicEffect.View = Matrix.CreateLookAt(
-                Scenario.CameraPosition, Scenario.CameraTarget, Vector3.Up);
+                Vector3.Transform(Scenario.CameraPosition, cameraRotation),
+                Scenario.CameraTarget, Vector3.Up);
 
             // Setting up the perspective projection
             float aspectRatio = (float)graphics.PreferredBackBufferWidth / (float)graphics.PreferredBackBufferHeight;
@@ -57,6 +70,10 @@ namespace Ololorentz {
 
         protected override void Update(GameTime gameTime) {
             float timePercentage = 100.0f * (t - Scenario.MinTime) / (Scenario.MaxTime - Scenario.MinTime);
+
+            HandleMouseRotation(Mouse.GetState());
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                mouseData.DropAllRotation();
 
             switch (state) {
             case SceneState.Before:

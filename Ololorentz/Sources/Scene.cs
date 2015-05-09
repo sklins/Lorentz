@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Input;
 
 namespace Ololorentz {
-    public sealed class Scene : Game {
+    public sealed partial class Scene : Game {
         public Scenario Scenario { get; private set; }
 
         private float t;
@@ -37,65 +37,6 @@ namespace Ololorentz {
             bool mouseActive = mouseState.LeftButton.HasFlag(ButtonState.Pressed);
             Point position = mouseState.Position;
             mouseData.Update(mouseActive, position);
-        }
-
-        protected override void Draw(GameTime gameTime) {
-            base.Draw(gameTime);
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            BasicEffect basicEffect = new BasicEffect(GraphicsDevice);
-            basicEffect.VertexColorEnabled = true;
-            GraphicsDevice.RasterizerState = RasterizerState.CullNone;
-
-            // Setting up the camera position
-            Matrix cameraRotation = Matrix.CreateRotationY(mouseData.Phi * MouseSensivity) *
-                Matrix.CreateRotationX(mouseData.Theta * MouseSensivity);
-
-            basicEffect.View = Matrix.CreateLookAt(
-                Vector3.Transform(Scenario.CameraPosition, cameraRotation),
-                Scenario.CameraTarget, Vector3.Up);
-
-            // Setting up the perspective projection
-            float aspectRatio = (float)graphics.PreferredBackBufferWidth / (float)graphics.PreferredBackBufferHeight;
-            basicEffect.Projection = Matrix.CreatePerspectiveFieldOfView(
-                Scenario.FovAngle, aspectRatio, Scenario.NearPlane, Scenario.FarPlane);
-
-
-            foreach (EffectPass pass in basicEffect.CurrentTechnique.Passes) {
-                pass.Apply();
-                VertexPositionColor[] vpc = Scenario.GetTriangulation(t).ToArray();
-                GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, vpc, 0, vpc.Length / 3);
-            }
-        }
-
-        protected override void Update(GameTime gameTime) {
-            float timePercentage = 100.0f * (t - Scenario.MinTime) / (Scenario.MaxTime - Scenario.MinTime);
-
-            HandleMouseRotation(Mouse.GetState());
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-                mouseData.DropAllRotation();
-
-            switch (state) {
-            case SceneState.Before:
-                if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                    state = SceneState.Running;
-                break;
-
-            case SceneState.Running:
-                t += Scenario.TimeStep;
-                Window.Title = String.Format("{0} ({1}%)", WindowTitle, Math.Round(timePercentage));
-                if (t >= Scenario.MaxTime)
-                    state = SceneState.Over;
-                break;
-
-            case SceneState.Over:
-                Window.Title = String.Format("{0} (over, press space to restart)", WindowTitle);
-                if (Keyboard.GetState().IsKeyDown(Keys.Space)) {
-                    state = SceneState.Running;
-                    t = Scenario.MinTime;
-                }
-                break;
-            }
         }
     }
 }

@@ -6,7 +6,11 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Ololorentz {
     public delegate Vector3 Trajectory(float t);
 
-    public sealed class Polygon {
+    public interface ISceneObject {
+        IEnumerable<VertexPositionColor> GetTriangulation(float t);
+    }
+
+    public sealed class Polygon : ISceneObject {
         public Trajectory[] Nodes { get; private set; }
         public Color Color { get; private set; }
 
@@ -25,7 +29,7 @@ namespace Ololorentz {
         }
     }
 
-    public sealed class Scenario {
+    public sealed class Scenario : ISceneObject {
         public Polygon[] Polygons { get; set; }
         public float MinTime { get; set; } = 0.0f;
         public float MaxTime { get; set; } = 1.0f;

@@ -48,6 +48,8 @@
     <Compile Include="Sources\Scene.cs" />
     <Compile Include="Sources\Primitives.cs" />
     <Compile Include="Sources\MouseData.cs" />
+    <Compile Include="Sources\Scene_Draw.cs" />
+    <Compile Include="Sources\Scene_Update.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

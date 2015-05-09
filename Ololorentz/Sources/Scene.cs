@@ -9,6 +9,8 @@ namespace Ololorentz {
     public sealed partial class Scene : Game {
         public Scenario Scenario { get; private set; }
 
+        private SpacetimeTransformation lorentzBoost;
+
         private float t;
 
         private enum SceneState {
@@ -26,6 +28,7 @@ namespace Ololorentz {
         public Scene(Scenario scenario) {
             this.graphics = new GraphicsDeviceManager(this);
             this.Scenario = scenario;
+            this.lorentzBoost = scenario.LorentzBoost;
             this.t = Scenario.MinTime;
             Window.Title = String.Format("{0} (press space to start)", WindowTitle);
         }

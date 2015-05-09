@@ -9,12 +9,12 @@ namespace Ololorentz {
     }
 
     public static class FuncUtils {
-        private const float Eps = 1e-5f;
+        public const float Eps = 1e-5f;
+        public const float Inf = 1e8f;
 
-        public static float FindRoot(Fu f, float t1, float t2) {
-            if (t2 < t1) {
-                MiscUtils.Swap(ref t1, ref t2);
-            }
+        public static float FindRoot(Fu f) {
+            float t1 = -Inf,
+                  t2 = Inf;
 
             float f1 = f(t1), f2 = f(t2);
 
@@ -40,16 +40,19 @@ namespace Ololorentz {
 
                 if (f0 > 0) {
                     t2 = t0;
-                    f2 = f0;
                 } else if (f0 < 0) {
                     t1 = t0;
-                    f1 = t0;
                 } else {
                     return t0;
                 }
+
+                f1 = f(t1);
+                f2 = f(t2);
             }
 
-            return MiscUtils.Mean(t1, t2);
+            float res = MiscUtils.Mean(t1, t2);
+            MiscUtils.Assert(Math.Abs(f(res)) < Eps);
+            return res;
         }
     }
 }

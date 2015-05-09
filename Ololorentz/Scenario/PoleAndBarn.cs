@@ -63,14 +63,16 @@ namespace Ololorentz {
             poleBottom = new Polygon(new Trajectory[] {poleP3, poleP4, poleQ4, poleQ3}, Color.Pink);
 
             return new Scenario() {
-                Objects = new ISceneObject[] {
+                Objects = new IScenarioObject[] {
                     barnFloor, barnLeftWall, barnRightWall, barnAnotherFloor, barnSideLeft,
                     barnSideRight, barnSideFront, barnSideBack,
                     poleLeft, poleRight, poleFront, poleBack, poleTop, poleBottom
                 },
                 MinTime = tMin,
                 MaxTime = tMax,
-                TimeStep = (tMax - tMin) / 500
+                TimeStep = (tMax - tMin) / 500,
+                SpeedOfLight = poleSpeed * 1.2f,
+                LorentzBoostSpeed = -poleSpeed
             };
         }
     }

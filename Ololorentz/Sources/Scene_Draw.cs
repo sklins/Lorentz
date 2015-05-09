@@ -8,6 +8,12 @@ using Microsoft.Xna.Framework.Input;
 namespace Ololorentz {
     public sealed partial class Scene : Game {
         protected override void Draw(GameTime gameTime) {
+            #if DEBUG
+            if (state == SceneState.Running) {
+                Console.WriteLine("=> Drawing scenario. Local time is {0}", t);
+            }
+            #endif
+
             base.Draw(gameTime);
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
@@ -31,7 +37,7 @@ namespace Ololorentz {
 
             foreach (EffectPass pass in basicEffect.CurrentTechnique.Passes) {
                 pass.Apply();
-                VertexPositionColor[] vpc = Scenario.GetTriangulation(t).ToArray();
+                VertexPositionColor[] vpc = Scenario.GetTransformedTriangulation(t, lorentzBoost).ToArray();
                 GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, vpc, 0, vpc.Length / 3);
             }
         }

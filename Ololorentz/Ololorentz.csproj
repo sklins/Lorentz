@@ -54,6 +54,9 @@
     <Compile Include="Scenario\PoleAndBarn.cs" />
     <Compile Include="Sources\FuncUtils.cs" />
     <Compile Include="Sources\MiscUtils.cs" />
+    <Compile Include="Sources\LorentzUtils.cs" />
+    <Compile Include="Sources\Scenario.cs" />
+    <Compile Include="Sources\Polygon.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

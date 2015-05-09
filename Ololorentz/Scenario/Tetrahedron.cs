@@ -27,7 +27,7 @@ namespace Ololorentz {
             Polygon s_bcd = new Polygon(new Trajectory[] {b, c, d}, Color.Purple);
 
             return new Scenario() {
-                Polygons = new Polygon[] {s_abc, s_abd, s_acd, s_bcd}
+                Objects = new ISceneObject[] {s_abc, s_abd, s_acd, s_bcd}
             };
         }
     }

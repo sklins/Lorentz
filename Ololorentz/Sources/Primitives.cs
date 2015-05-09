@@ -30,7 +30,7 @@ namespace Ololorentz {
     }
 
     public sealed class Scenario : ISceneObject {
-        public Polygon[] Polygons { get; set; }
+        public ISceneObject[] Objects { get; set; }
         public float MinTime { get; set; } = 0.0f;
         public float MaxTime { get; set; } = 1.0f;
         public float TimeStep { get; set; } = 0.001f;
@@ -43,7 +43,7 @@ namespace Ololorentz {
         public float FarPlane { get; set; } = 100f;
 
         public IEnumerable<VertexPositionColor> GetTriangulation(float t) {
-            foreach (Polygon p in Polygons) {
+            foreach (ISceneObject p in Objects) {
                 foreach (VertexPositionColor vpc in p.GetTriangulation(t))
                     yield return vpc;
             }

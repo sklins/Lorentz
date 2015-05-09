@@ -5,7 +5,7 @@ namespace Ololorentz {
     public static class PoleAndBarn {
         public static Scenario GetScenario() {
             Func<float, float> f = t => 4 * (float)
-                Math.Exp(-Math.Pow((double) t * 5, 2));
+                Math.Exp(-Math.Pow((double) t * 3, 2));
 
             float
             poleLength = 9.2f,
@@ -63,14 +63,14 @@ namespace Ololorentz {
             poleBottom = new Polygon(new Trajectory[] {poleP3, poleP4, poleQ4, poleQ3}, Color.Pink);
 
             return new Scenario() {
-                Polygons = new Polygon[] {
+                Objects = new ISceneObject[] {
                     barnFloor, barnLeftWall, barnRightWall, barnAnotherFloor, barnSideLeft,
                     barnSideRight, barnSideFront, barnSideBack,
                     poleLeft, poleRight, poleFront, poleBack, poleTop, poleBottom
                 },
                 MinTime = tMin,
                 MaxTime = tMax,
-                TimeStep = (tMax - tMin) / 2000
+                TimeStep = (tMax - tMin) / 500
             };
         }
     }

@@ -2,8 +2,18 @@
 using Microsoft.Xna.Framework;
 
 namespace Ololorentz {
-    public static class PoleAndBarn {
-        public static Scenario GetScenario() {
+    public sealed class PoleAndBarn : ScenarioBuilder {
+        public override string ScenarioTitle {
+            get { return "Pole and barn"; }
+        }
+
+        [ScenarioParameter(DefaultValue = "false")]
+        public bool PoleReferenceFrame { get; set; } = false;
+
+        [ScenarioParameter(DefaultValue = "0.1")]
+        public float Beta { get; set; } = 0.83f;
+
+        public override Scenario BuildScenario() {
             Func<float, float> f = t => 4 * (float)
                 Math.Exp(-Math.Pow((double) t * 3, 2));
 
@@ -71,8 +81,8 @@ namespace Ololorentz {
                 MinTime = tMin,
                 MaxTime = tMax,
                 TimeStep = (tMax - tMin) / 500,
-                SpeedOfLight = poleSpeed * 1.2f,
-                LorentzBoostSpeed = -poleSpeed
+                SpeedOfLight = poleSpeed / Beta,
+                LorentzBoostSpeed = PoleReferenceFrame ? (-poleSpeed) : 0
             };
         }
     }

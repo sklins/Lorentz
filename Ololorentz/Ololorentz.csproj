@@ -41,6 +41,7 @@
     <Reference Include="Tao.Sdl">
       <HintPath>dll\Tao.Sdl.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Sources\AssemblyInfo.cs" />
@@ -57,10 +58,14 @@
     <Compile Include="Sources\LorentzUtils.cs" />
     <Compile Include="Sources\Scenario.cs" />
     <Compile Include="Sources\Polygon.cs" />
+    <Compile Include="Scenario\ScenarioBuilder.cs" />
+    <Compile Include="Scenario\ScenarioParamParser.cs" />
+    <Compile Include="GUI\SetupForm.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Sources\" />
     <Folder Include="Scenario\" />
+    <Folder Include="GUI\" />
   </ItemGroup>
 </Project>

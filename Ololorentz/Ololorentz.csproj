@@ -50,7 +50,6 @@
     <Compile Include="Sources\MouseData.cs" />
     <Compile Include="Sources\Scene_Draw.cs" />
     <Compile Include="Sources\Scene_Update.cs" />
-    <Compile Include="Scenario\Tetrahedron.cs" />
     <Compile Include="Scenario\Main.cs" />
     <Compile Include="Scenario\PoleAndBarn.cs" />
     <Compile Include="Sources\FuncUtils.cs" />

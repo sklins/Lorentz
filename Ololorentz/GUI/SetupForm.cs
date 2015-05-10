@@ -33,7 +33,7 @@ namespace Ololorentz {
             Dictionary<string, ScenarioParamInfo> p = scenarioBuilder.GetScenarioParameters();
             foreach (string k in p.Keys) {
                 var label = new Label();
-                label.Text = String.Format("{1} ({0}): ", p[k].Type.Name.ToLower(), k);
+                label.Text = p[k].Title ?? String.Format("{1} ({0}): ", p[k].Type.Name.ToLower(), k);
 
                 TextBox textbox = null;
                 CheckBox checkbox = null;

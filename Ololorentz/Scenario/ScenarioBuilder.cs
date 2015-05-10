@@ -4,11 +4,13 @@ using System.Reflection;
 
 namespace Ololorentz {
     public sealed class ScenarioParameterAttribute : Attribute {
+        public string Title { get; set; }
         public string DefaultValue { get; set; }
     }
 
     public sealed class ScenarioParamInfo {
         public Type Type { get; set; }
+        public string Title { get; set; } = null;
         public string DefaultValue { get; set; }
     }
 
@@ -34,6 +36,7 @@ namespace Ololorentz {
             foreach (PropertyInfo pi in GetScenarioPropertyInfos()) {
                 res.Add(pi.Name, new ScenarioParamInfo() {
                     Type = pi.PropertyType,
+                    Title = pi.GetCustomAttribute<ScenarioParameterAttribute>().Title,
                     DefaultValue = pi.GetCustomAttribute<ScenarioParameterAttribute>().DefaultValue
                 });
             }

@@ -19,6 +19,7 @@ namespace Ololorentz {
 
         private sealed class ParamControlSet {
             public TextBox TextBox { get; set; }
+            public CheckBox CheckBox { get; set; }
             public Label Label { get; set; }
         }
 
@@ -34,11 +35,21 @@ namespace Ololorentz {
                 var label = new Label();
                 label.Text = String.Format("{1} ({0}): ", p[k].Type.Name.ToLower(), k);
 
-                var textbox = new TextBox();
-                textbox.Text = p[k].DefaultValue;
+                TextBox textbox = null;
+                CheckBox checkbox = null;
+
+                if (p[k].Type == typeof(bool)) {
+                    checkbox = new CheckBox();
+                    checkbox.Text = "";
+                    checkbox.Checked = (bool) ScenarioParamParser.Parse(typeof(bool), p[k].DefaultValue);
+                } else {
+                    textbox = new TextBox();
+                    textbox.Text = p[k].DefaultValue;
+                }
 
                 paramControls.Add(k, new ParamControlSet() {
                     TextBox = textbox,
+                    CheckBox = checkbox,
                     Label = label
                 });
             }
@@ -51,17 +62,24 @@ namespace Ololorentz {
             int i = 0;
             foreach (ParamControlSet pcs in paramControls.Values) {
                 Label l = pcs.Label;
-                TextBox tb = pcs.TextBox;
+                TextBox tb = pcs.TextBox ?? new TextBox();
+                CheckBox cb = pcs.CheckBox;
 
                 l.Left = Separator;
                 l.Top = Separator + (tb.Height + Separator) * i;
                 l.Width = LabelWidth;
                 Controls.Add(l);
 
-                tb.Left = Separator * 2 + LabelWidth;
-                tb.Top = Separator + (tb.Height + Separator) * (i++);
-                tb.Width = this.Width - 3 * Separator - LabelWidth;
-                Controls.Add(tb);
+                if (cb != null) {
+                    cb.Left = Separator * 2 + LabelWidth;
+                    cb.Top = Separator + (tb.Height + Separator) * (i++);
+                    Controls.Add(cb);
+                } else {
+                    tb.Left = Separator * 2 + LabelWidth;
+                    tb.Top = Separator + (tb.Height + Separator) * (i++);
+                    tb.Width = this.Width - 3 * Separator - LabelWidth;
+                    Controls.Add(tb);
+                }
             }
 
             runBtn.Left = Separator;
@@ -75,7 +93,7 @@ namespace Ololorentz {
             Controls.Add(closeBtn);
 
             closeBtn.Click += (sender, e) => {
-                Application.Exit();
+                Close();
             };
 
             runBtn.Click += (sender, e) => {
@@ -86,7 +104,11 @@ namespace Ololorentz {
         private void RunScenario() {
             var props = new Dictionary<string, string>();
             foreach (string k in paramControls.Keys) {
-                props[k] = paramControls[k].TextBox.Text;
+                if (paramControls[k].CheckBox != null) {
+                    props[k] = paramControls[k].CheckBox.Checked ? "true" : "false";
+                } else {
+                    props[k] = paramControls[k].TextBox.Text;
+                }
             }
 
             try {

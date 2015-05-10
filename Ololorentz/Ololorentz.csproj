@@ -61,6 +61,7 @@
     <Compile Include="Scenario\ScenarioBuilder.cs" />
     <Compile Include="Scenario\ScenarioParamParser.cs" />
     <Compile Include="GUI\SetupForm.cs" />
+    <Compile Include="GUI\ChooseScenarioForm.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

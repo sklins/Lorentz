@@ -30,7 +30,11 @@ namespace Ololorentz {
                 int ind = scenariosList.SelectedIndex;
                 if (ind < 0 || ind >= scenarioBuilders.Length)
                     return;
-                new SetupForm(scenarioBuilders[ind]).ShowDialog();
+                if (scenarioBuilders[ind].GetScenarioParameters().Count != 0) {
+                    new SetupForm(scenarioBuilders[ind]).ShowDialog();
+                } else {
+                    Program.RunAnimation(scenarioBuilders[ind].BuildScenario());
+                }
             };
         }
     }

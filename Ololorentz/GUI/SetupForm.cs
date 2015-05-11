@@ -28,6 +28,7 @@ namespace Ololorentz {
 
         private Button runBtn = new Button();
         private Button closeBtn = new Button();
+        private Button helpBtn = new Button();
 
         private void InitializeModel() {
             Dictionary<string, ScenarioParamInfo> p = scenarioBuilder.GetScenarioParameters();
@@ -99,6 +100,16 @@ namespace Ololorentz {
             runBtn.Click += (sender, e) => {
                 RunScenario();
             };
+
+            helpBtn.Left = this.Width - Separator - helpBtn.Width;
+            helpBtn.Top = runBtn.Top;
+            helpBtn.Text = "Help";
+            Controls.Add(helpBtn);
+
+            helpBtn.Click += (sender, e) => {
+                new HelpForm().ShowDialog();
+            };
+
         }
 
         private void RunScenario() {

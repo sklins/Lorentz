@@ -61,11 +61,17 @@
     <Compile Include="Scenario\ScenarioParamParser.cs" />
     <Compile Include="GUI\SetupForm.cs" />
     <Compile Include="GUI\ChooseScenarioForm.cs" />
+    <Compile Include="GUI\HelpForm.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Sources\" />
     <Folder Include="Scenario\" />
     <Folder Include="GUI\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GUI\Help.txt">
+      <LogicalName>Help.txt</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

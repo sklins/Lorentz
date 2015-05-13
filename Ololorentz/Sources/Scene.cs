@@ -23,7 +23,7 @@ namespace Ololorentz {
         private GraphicsDeviceManager graphics;
         #pragma warning restore
 
-        public const string WindowTitle = "Ololorentz 3D";
+        public const string WindowTitle = "3D visualisation of Lorentz transformations";
 
         public Scene(Scenario scenario) {
             this.graphics = new GraphicsDeviceManager(this);

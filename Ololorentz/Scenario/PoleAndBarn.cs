@@ -13,6 +13,12 @@ namespace Ololorentz {
         [ScenarioParameter(DefaultValue = "0.1")]
         public float Beta { get; set; } = 0.83f;
 
+        public override void Check() {
+            if (Beta > 0.9f) {
+                throw new Exception("Beta must be <0.9");
+            }
+        }
+
         public override Scenario BuildScenario() {
             Func<float, float> f = t => 4 * (float)
                 Math.Exp(-Math.Pow((double) t * 3, 2));

@@ -17,6 +17,7 @@ namespace Ololorentz {
     public abstract class ScenarioBuilder {
         public abstract string ScenarioTitle { get; }
         public abstract Scenario BuildScenario();
+        public abstract void Check();
 
         private IEnumerable<PropertyInfo> GetScenarioPropertyInfos() {
             // ScenarioBuilder is a polymorphic type.

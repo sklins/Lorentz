@@ -124,6 +124,7 @@ namespace Ololorentz {
 
             try {
                 scenarioBuilder.SetScenarioParameters(props);
+                scenarioBuilder.Check();
             } catch (Exception e) {
                 MessageBox.Show("Parameter parsing exception:\n" + e.ToString());
                 return;

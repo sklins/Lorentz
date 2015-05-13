@@ -20,6 +20,8 @@ namespace Ololorentz {
                 scenarioBuilders[i] = ci.Invoke(new object[] {}) as ScenarioBuilder;
                 scenariosList.Items.Add(scenarioBuilders[i].ScenarioTitle);
             }
+
+            scenariosList.Items.Add("Open custom scenario..");
         }
 
         private void InitializeComponent() {
@@ -28,7 +30,12 @@ namespace Ololorentz {
 
             scenariosList.DoubleClick += (sender, e) => {
                 int ind = scenariosList.SelectedIndex;
-                if (ind < 0 || ind >= scenarioBuilders.Length)
+                if (ind == scenarioBuilders.Length) {
+                    var ofd = new OpenFileDialog();
+                    ofd.CheckFileExists = true;
+                    ofd.ShowDialog();
+                    MessageBox.Show("Invalid scenario format");
+                } if (ind < 0 || ind >= scenarioBuilders.Length)
                     return;
                 if (scenarioBuilders[ind].GetScenarioParameters().Count != 0) {
                     new SetupForm(scenarioBuilders[ind]).ShowDialog();
